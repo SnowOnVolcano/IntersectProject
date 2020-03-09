@@ -1,4 +1,12 @@
 #pragma once
+#include <iostream>
+#include <fstream>
+#include <set>
+#include <cmath>
+#include <vector>
+#include <set>
+
+
 // Point: (x, y)
 struct Point
 {
@@ -53,11 +61,15 @@ struct Circle
 
 };
 
+// set of intersections
+std::set<Point> points;
+
 // calculate the intersections of two lines
-void calLineLineIst(set<Point>& points, Line& line1, Line& line2);
+static void calLineLineIst(Line& line1, Line& line2);
 
 // calculate the intersections of line and Circle
-void calLineCircleIst(set<Point>& points, Line& line, Circle& circle);
+static void calLineCircleIst(Line& line, Circle& circle);
 
 // calculate intersections of two circles
-void calCircleCircleIst(set<Point>& points, Circle& circle1, Circle& circle2);
+static void calCircleCircleIst(Circle& circle1, Circle& circle2);
+

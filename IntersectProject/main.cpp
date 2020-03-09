@@ -1,14 +1,9 @@
-#include <iostream>
-#include <fstream>
-#include <set>
-#include <cmath>
-#include <vector>
 #include "head.h"
 
 using namespace std;
 
 // calculate the intersections of two lines
-void calLineLineIst(set<Point> &points, Line& line1, Line& line2) {
+static void calLineLineIst(Line& line1, Line& line2) {
 	int D;
 	
 	D = line1.a * line2.b - line2.a * line1.b;
@@ -33,7 +28,7 @@ void calLineLineIst(set<Point> &points, Line& line1, Line& line2) {
 }
 
 // calculate the intersections of line and Circle
-void calLineCircleIst(set<Point>& points, Line& line, Circle& circle) {
+static void calLineCircleIst(Line& line, Circle& circle) {
 	int intercept;
 	
 	// intercept=r^2-d^2=r^2-(ax+by+c)^2/(a^2+b^2)
@@ -95,7 +90,7 @@ void calLineCircleIst(set<Point>& points, Line& line, Circle& circle) {
 }
 
 // calculate intersections of two circles
-void calCircleCircleIst(set<Point>& points, Circle& circle1, Circle& circle2) {
+static void calCircleCircleIst(Circle& circle1, Circle& circle2) {
 	int radiusSum;
 	int radiusDiff;
 	int centerDis;
@@ -117,7 +112,7 @@ void calCircleCircleIst(set<Point>& points, Circle& circle1, Circle& circle2) {
 	};
 	
 	// the intersections of two circles are also the intersections of line and circle
-	calLineCircleIst(points, line, circle1);
+	calLineCircleIst(line, circle1);
 }
 
 int main(int argc, char* argv[]) {
@@ -143,7 +138,6 @@ int main(int argc, char* argv[]) {
 	Circle circle;
 	vector<Line> lines;
 	vector<Circle> circles;
-	set<Point> points;
 	
 	fileIn >> N;
 
@@ -155,10 +149,10 @@ int main(int argc, char* argv[]) {
 			fileIn >> x1 >> y1 >> x2 >> y2;
 			line = Line(x1, y1, x2, y2);
 			for (Line it : lines) {
-				calLineLineIst(points, line, it);
+				calLineLineIst(line, it);
 			}
 			for (Circle it : circles) {
-				calLineCircleIst(points, line, it);
+				calLineCircleIst(line, it);
 			}
 			lines.emplace_back(line);
 			break;
@@ -166,10 +160,10 @@ int main(int argc, char* argv[]) {
 			fileIn >> x >> y >> r;
 			circle = Circle(x, y, r);
 			for (Line it : lines) {
-				calLineCircleIst(points, it, circle);
+				calLineCircleIst(it, circle);
 			}
 			for (Circle it : circles) {
-				calCircleCircleIst(points, it, circle);
+				calCircleCircleIst(it, circle);
 			}
 			circles.emplace_back(circle);
 			break;
