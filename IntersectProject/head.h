@@ -6,24 +6,23 @@
 #include <vector>
 #include <set>
 
+#define EPS 1e-7
+
 // Point: (x, y)
 struct Point
 {
-	float x, y;
+	double x, y;
 
 	Point() :x(), y() {}
 
-	Point(float x, float y) :x(x), y(y) {}
+	Point(double x, double y) :x(x), y(y) {}
 
-	bool operator == (const Point& other) const {
-		return fabs(x - other.x) < 0.00000001 && fabs(y - other.y) < 0.00000001;
-	}
 	bool operator < (const Point& other) const {
-		if (x != other.x) {
-			return x < other.x;
+		if (fabs(x - other.x) <= EPS && fabs(y - other.y) <= EPS) {
+			return false;
 		}
 		else {
-			return y < other.y;
+			return (x != other.x) ? x < other.x : y < other.y;
 		}
 	}
 	

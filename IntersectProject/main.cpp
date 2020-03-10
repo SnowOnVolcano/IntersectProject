@@ -19,8 +19,8 @@ static void calLineLineIst(Line& line1, Line& line2) {
 		//	let D=a1*b2-a2*b1
 		//	==> x=(b1*c2-b2*c1)/D, y=(a2*c1-a1*c2)/D
 		Point point = { 
-			(line1.b * line2.c - line2.b * line1.c) / (float)D, 
-			(line2.a * line1.c - line1.a * line2.c) / (float)D 
+			(double)((double)line1.b * (double)line2.c - (double)line2.b * (double)line1.c) / (double)D,
+			(double)((double)line2.a * (double)line1.c - (double)line1.a * (double)line2.c) / (double)D
 		};
 		points.insert(point);
 		break;
@@ -52,8 +52,8 @@ static void calLineCircleIst(Line& line, Circle& circle) {
 
 	// tPoint is the intersection of line and tLine
 	Point tPoint = {
-		(tLine.b * line.c - line.b * tLine.c) / (float)D,
-		(line.a * tLine.c - tLine.a* + line.c) / (float)D
+		(double)((double)tLine.b * (double)line.c - (double)line.b * (double)tLine.c) / (double)D,
+		(double)((double)line.a * (double)tLine.c - (double)tLine.a* +(double)line.c) / (double)D
 	};
 
 	switch (intercept) 
@@ -63,16 +63,16 @@ static void calLineCircleIst(Line& line, Circle& circle) {
 		break;
 
 	default:// line passes through circle
-		float vecX;
-		float vecY;
-		float offset;
+		double vecX;
+		double vecY;
+		double offset;
 
 		// (vecX, vecY) is a unit vector
-		vecX = (float)(line.b / sqrt(pow(line.a, 2) + pow(line.b, 2)));
-		vecY = (float)(-line.a / sqrt(pow(line.a, 2) + pow(line.b, 2)));
+		vecX = (double)(line.b / sqrt(pow(line.a, 2) + pow(line.b, 2)));
+		vecY = (double)(-line.a / sqrt(pow(line.a, 2) + pow(line.b, 2)));
 		
 		// Offset is half of the intercept
-		offset = (float)sqrt(intercept / (pow(line.a, 2) + pow(line.b, 2)));
+		offset = (double)sqrt(intercept / (pow(line.a, 2) + pow(line.b, 2)));
 
 		// intersection = tPoint +/- vec*offset
 		Point ist1 = {
@@ -118,17 +118,29 @@ static void calCircleCircleIst(Circle& circle1, Circle& circle2) {
 int main(int argc, char* argv[]) {
 	ifstream fileIn;
 	ofstream fileOut;
-	/*for (int i = 0; i < argc; i++) {
+	/*
+	if (argc != 5) {
+		cout << "Please check your Format: \n\tintersect.exe -i <input> -o <output>\n";
+		exit(0);
+	}
+
+	for (int i = 0; i < argc; i++) {
 		if ((string)argv[i] == "-i") {
 			fileIn = ifstream(argv[i + 1]);
 		}
 		else if ((string)argv[i] == "-o") {
 			fileOut = ofstream(argv[i + 1]);
 		}
-	}*/
-	fileIn.open("input.txt");
-	fileOut.open("output.txt");
+	}
+	
+	if (!fileIn) {
+		cout << "Please add your input file.";
+		exit(0);
+	}
+	*/
 
+	fileIn = ifstream("input.txt");
+	fileOut = ofstream("output.txt");
 	int N;
 	char type;
 	int x1, y1;
