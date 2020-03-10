@@ -6,7 +6,6 @@
 #include <vector>
 #include <set>
 
-
 // Point: (x, y)
 struct Point
 {
@@ -16,9 +15,18 @@ struct Point
 
 	Point(float x, float y) :x(x), y(y) {}
 
-	bool operator < (const Point& other) const {
-		return x < other.x;
+	bool operator == (const Point& other) const {
+		return fabs(x - other.x) < 0.00000001 && fabs(y - other.y) < 0.00000001;
 	}
+	bool operator < (const Point& other) const {
+		if (x != other.x) {
+			return x < other.x;
+		}
+		else {
+			return y < other.y;
+		}
+	}
+	
 };
 
 // Line: ax + by + c = 0 (a^2+b^2!=0)

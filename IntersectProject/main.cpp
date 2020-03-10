@@ -55,7 +55,7 @@ static void calLineCircleIst(Line& line, Circle& circle) {
 		(tLine.b * line.c - line.b * tLine.c) / (float)D,
 		(line.a * tLine.c - tLine.a* + line.c) / (float)D
 	};
-	
+
 	switch (intercept) 
 	{
 	case 0:	// line is tangent to circle
