@@ -118,18 +118,19 @@ static void calCircleCircleIst(Circle& circle1, Circle& circle2) {
 int main(int argc, char* argv[]) {
 	ifstream fileIn;
 	ofstream fileOut;
-	/*
 	if (argc != 5) {
 		cout << "Please check your Format: \n\tintersect.exe -i <input> -o <output>\n";
 		exit(0);
 	}
 
+	string fout_name;
 	for (int i = 0; i < argc; i++) {
 		if ((string)argv[i] == "-i") {
 			fileIn = ifstream(argv[i + 1]);
 		}
 		else if ((string)argv[i] == "-o") {
 			fileOut = ofstream(argv[i + 1]);
+			fout_name = argv[i + 1];
 		}
 	}
 	
@@ -137,10 +138,9 @@ int main(int argc, char* argv[]) {
 		cout << "Please add your input file.";
 		exit(0);
 	}
-	*/
 
-	fileIn = ifstream("input.txt");
-	fileOut = ofstream("output.txt");
+	cout << "Start working ......\n";
+
 	int N;
 	char type;
 	int x1, y1;
@@ -185,5 +185,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	fileOut << points.size();
+
+	cout << "Finish!!!   Result is in \"" << fout_name <<"\"";
 	return 0;
 }

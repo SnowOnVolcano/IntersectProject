@@ -150,8 +150,8 @@ namespace UnitTest
 			for (Point it : points) {
 				p = it;
 			}
-			Assert::AreEqual((float)-5.0, p.x);
-			Assert::AreEqual((float)1.0, p.y);
+			Assert::AreEqual((double)-5.0, p.x);
+			Assert::AreEqual((double)1.0, p.y);
 		}
 		TEST_METHOD(TestLineLine2)
 		{
